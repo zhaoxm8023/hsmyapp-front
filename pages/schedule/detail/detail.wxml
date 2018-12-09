@@ -1,0 +1,80 @@
+<view class="page">
+  <view class="page-body">
+    <view class="img-position" style="background-color:#CDEEFD">
+      <image src="{{currentscheduleDetail.creatorAvatarUrl}}" style="vertical-align: middle;width:40px; height: 40px;border-radius:50%"></image>
+      <span style="font-size:12px; margin-left:5px;">{{currentscheduleDetail.creatorNickName}} 创建</span>
+    </view>
+
+    <view class="weui-cells weui-cells_after-title">
+
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__bd">
+          <view style="padding-top:35px; font-size: 20px; line-height: 30px;">
+            {{currentscheduleDetail.title}}
+          </view>
+          <view class="weui-input">
+            <image src="../../../images/base/meetingroom.png" style="vertical-align: middle;width:20px; height: 20px;"></image>
+            <span style="margin-left:8px;vertical-align: middle">{{currentscheduleDetail.meetingRoom.roomNo}}</span>
+          </view>
+        </view>
+      </view>
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__bd">
+          <view class="weui-input">
+            <image src="../../../images/base/time.png" style="vertical-align: middle;width:20px; height: 20px;border-radius:50%"></image>
+            <span style="margin-left:5px; vertical-align: middle">
+      {{currentscheduleDetail.date}} {{currentscheduleDetail.startTime > '18:00'?' 晚上':''}}{{currentscheduleDetail.endTime
+        <='12:00' ? ' 上午': ''}} {{currentscheduleDetail.startTime>='12:00'&&currentscheduleDetail.endTime
+          <='18:00' ? ' 下午': ''}}{{currentscheduleDetail.startTime}}-{{currentscheduleDetail.endTime}}
+             </span>
+          </view>
+
+        </view>
+      </view>
+
+    </view>
+    <view style="padding-top:5px"></view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+
+          <view class="weui-label">
+            <image src="../../../images/base/participants.png" style="vertical-align: middle;width:25px; height: 25px;border-radius:50%"></image>
+            <span style="margin-left:5px; vertical-align: middle">{{currentscheduleDetail.participants.length==0?1:currentscheduleDetail.participants.length}}人参与</span>
+          </view>
+        </view>
+        <view class="weui-cell__bd" style="text-align:right;">
+          <navigator url="../participant/participant?currentschedule={{currentschedule}}" class="navigator">
+            <view style="text-align:right" wx:for="{{currentscheduleDetail.participants}}" wx:for-item="participant" wx:for-index="index" wx:key="{{participant.id}}" hidden="{{index>5?true:false}}">
+              <image src="{{participant.avatarUrl}}" style="vertical-align: middle;width:25px; height: 25px;border-radius:50%;"></image>
+            </view>
+            <view style="text-align:right" hidden="{{currentscheduleDetail.participants.length==0?false:true}}">
+              <image src="{{currentscheduleDetail.creatorAvatarUrl}}" style="vertical-align: middle;width:25px; height: 25px;border-radius:50%"></image>
+            </view>
+            <view style="text-align:right" class="navigator-arrow"></view>
+          </navigator>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="jh-tab-bar" hidden="{{isHidden==true}}">
+    
+  <view class="jh-tab-item" wx:for="{{ jhDataForTabbar }}" wx:for-item="tabItem" wx:for-index="index" wx:key="sTitle">
+    <!-- 引入单个的tab -->
+    <form bindsubmit="{{tabItem.event}}" report-submit="true">
+    <view class="jh-tab-content"  data-key="{{ tabItem.sTitle }}">
+      <!-- icon -->
+      <view class="jh-tab-icon">
+        <button open-type="{{tabItem.openType}}" formType="submit"  style="background-color:#F7F7FA;border:none" size="mini" class="button-boder"><image src="{{ tabItem.sIconUrl }}" style="vertical-align: middle;text-align:center"></image></button>
+      </view>
+      <!-- 标题 -->
+      <view style="text-align:center;font-size:12px;">
+        {{ tabItem.sTitle }}
+      </view>
+        
+    </view>
+    </form>
+  </view>
+
+</view>

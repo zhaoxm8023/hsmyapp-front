@@ -1,0 +1,16 @@
+<view class="login" hidden="{{islogin}}">
+    <view class="img-position" style="text-align:center;opacity: 0.5;">
+      <image src="../../images/base/tab-bar-schedule-selected.png" style="vertical-align: middle;width:70px; height: 70px;"></image>
+    </view>
+  <form bindsubmit="loginBtnClick">
+    <view class="section">
+      <view class="section__title">部门:</view>
+      <picker bindchange="bindSelectTeam" name="teamIndex" value="{{teamIndex}}" range="{{teams}}" range-key="name">
+        <view>{{teams[teamIndex].name}}</view>
+      </picker>
+    </view>
+    <view id='button'>
+      <button open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo" formType="submit">登录</button>
+    </view>
+  </form>
+</view>

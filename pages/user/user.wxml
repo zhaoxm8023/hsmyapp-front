@@ -1,0 +1,47 @@
+<view class="page">
+  <view class="page-body">
+    <view class="img-position" style="background-color:#CDEEFD">
+      <image src="{{userInfo.avatarUrl}}" style="vertical-align: middle;width:40px; height: 40px;border-radius:50%"></image>
+      <span style="font-size:12px; margin-left:5px;">{{userInfo.nickName}}的主页</span>
+    </view>
+     <view class="weui-cells weui-cells_after-title">
+           <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__bd">
+          <view class="weui-input">
+            <image src="../../images/base/participants.png" style="vertical-align: middle;width:20px; height: 20px;"></image>
+            <span style="margin-left:5px; vertical-align: middle">
+             {{team.name}}
+             </span>
+          </view>
+        </view>
+      </view>
+     </view>
+    <view class="weui-cells weui-cells_after-title">
+
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__bd">
+          <view class="weui-input" bindtap="todo">
+            <image src="../../images/base/todo-task.png" style="vertical-align: middle;width:20px; height: 20px;"></image>
+            <span style="margin-left:5px; vertical-align: middle">
+             我的待办
+             </span>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="weui-cells weui-cells_after-title">
+
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__bd">
+          <view class="weui-input" bindtap="logout">
+            <image src="../../images/base/logout.png" style="vertical-align: middle;width:20px; height: 20px;"></image>
+            <span style="margin-left:5px; vertical-align: middle">
+             退出登录
+             </span>
+          </view>
+        </view>
+      </view>
+    </view>
+
+  </view>
+</view>

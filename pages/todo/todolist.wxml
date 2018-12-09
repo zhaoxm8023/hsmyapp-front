@@ -1,0 +1,38 @@
+<view class="page">
+  <view class="page__bd">
+    <view class="img-position">
+      <image src="{{userInfo.avatarUrl}}" style="vertical-align: middle;width:40px; height: 40px;border-radius:50%"></image>
+      <span style="font-size:12px; margin-left:5px;">{{userInfo.nickName}}的待参加会议</span>
+    </view>
+
+    <view style="text-align:center">
+      <picker mode="date" name="date" value="{{date}}" bindchange="bindDateChange">
+        <view class="weui-input">{{date}}</view>
+      </picker>
+    </view>
+
+    <view class="page-section-spacing">
+      <scroll-view scroll-y style="height: 350px;">
+        <view class="kind-list">
+          <view class="kind-list__item" hidden="{{schedules.length==0?fasle:true}}" data-selecteddate="{{cur_year}}-{{cur_month>9?cur_month:'0'+cur_month}}-{{cur_day>9?cur_day:'0'+cur_day}}" bindtap="addSchedule">
+            <view class="weui-flex kind-list__item-hd" style="text-align:center">
+              <view class="weui-flex__item">今日无待参加会议</view>
+            </view>
+          </view>
+          <block wx:for="{{schedules}}" wx:key="id" wx:for-index="idx">
+            <view class="kind-list__item">
+              <view id="{{item.id}}" class="weui-flex kind-list__item-hd" style="background-color:#CDEEFD" data-scheduleid="{{item.scheduleId}}" bindtap="detail">
+                <view class="weui-flex__item">{{item.roomNo}} {{item.title}} 
+                  <view style="font-size:12px;">{{item.date}}{{item.startTime > '18:00'?' 晚上':''}}{{item.endTime
+                    <='12:00' ? ' 上午': ''}} {{item.startTime>='12:00'&&item.endTime
+                      <='18:00' ? ' 下午': ''}}{{item.startTime}}-{{item.endTime}}</view>
+                  </view>
+                  <image class="kind-list__img" src="{{item.creatorAvatarUrl}}" style="vertical-align: middle;width:40px; height: 40px;border-radius:50%"></image>
+                </view>
+              </view>
+          </block>
+          </view>
+      </scroll-view>
+      </view>
+    </view>
+  </view>

@@ -1,0 +1,28 @@
+<view class="regist">
+    <view class="img-position" style="text-align:center;opacity: 0.5;">
+      <image src="../../images/base/tab-bar-schedule-selected.png" style="vertical-align: middle;width:70px; height: 70px;"></image>
+    </view>
+  <form bindsubmit="formSubmit">
+    <view class="section">
+      <view class="section__title">部门:</view>
+      <picker bindchange="bindSelectTeam" name="teamIndex" value="{{teamIndex}}" range="{{teams}}" range-key="name">
+        <view>{{teams[teamIndex].name}}</view>
+      </picker>
+    </view>
+   <view class="section">
+      <view class="section__title">姓名:</view>
+      <input type="text" name="name" value="{{name}}" placeholder="姓名" focus/>
+    </view>
+     <view class="section">
+      <view class="section__title">手机:</view>
+      <input  type="number" name="mobileNo" value="{{mobileNo}}" placeholder="手机号" />
+    </view>
+     <view class="section">
+      <view class="section__title">口令:</view>
+      <input password name="token" value="{{token}}" placeholder="口令" />
+    </view>
+    <view id='button'>
+      <button formType="submit">绑定</button>
+    </view>
+  </form>
+</view>

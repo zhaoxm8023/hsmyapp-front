@@ -1,0 +1,89 @@
+<view class="page">
+  <view class="page__bd">
+    <form bindsubmit="formSubmit" report-submit="true">
+      <view class="weui-cells__title">会议信息</view>
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">会议名称：</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input class="weui-input" name="title" value="{{title}}" placeholder="请输入会议名称" focus placeholder-style="color:#F76260" />
+          </view>
+        </view>
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">会议室：</view>
+          </view>
+          <view class="weui-cell__bd">
+            <picker bindchange="bindSelectMeetingRoom" name="id" value="{{meetingRooms[meetingRoomIndex].id}}" range="{{meetingRooms}}" range-key="roomNo">
+              <view class="weui-input">{{meetingRooms[meetingRoomIndex].roomNo}}</view>
+            </picker>
+          </view>
+        </view>
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">日期：</view>
+          </view>
+          <view class="weui-cell__bd">
+            <picker mode="date" name="date" value="{{date}}" bindchange="bindDateChange">
+              <view class="weui-input">{{date}}</view>
+            </picker>
+          </view>
+        </view>
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">开始时间：</view>
+          </view>
+          <view class="weui-cell__bd">
+            <picker mode="time" name="startTime" value="{{startTime}}" bindchange="bindStartTimeChange">
+              <view class="weui-input">{{startTime}}</view>
+            </picker>
+          </view>
+        </view>
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">结束时间：</view>
+          </view>
+          <view class="weui-cell__bd">
+            <picker mode="time" name="endTime" value="{{endTime}}" bindchange="bindEndTimeChange">
+              <view class="weui-input">{{endTime}}</view>
+            </picker>
+          </view>
+        </view>
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">是否重复：</view>
+          </view>
+          <view class="weui-cell__bd">
+            <picker bindchange="bindSelectRepeatMode" name="repeatMode" value="{{repeatModes[repeatModeIndex].repeatMode}}" range="{{repeatModes}}" range-key="repeatModeName">
+              <view class="weui-input">{{repeatModes[repeatModeIndex].repeatModeName}}</view>
+            </picker>
+          </view>
+        </view>
+      </view>
+      <view class="weui-cells__title">会议室信息</view>
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">设备名称：</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input class="weui-input" value="{{vnedor}}" disabled="true" />
+          </view>
+        </view>
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">会场号：</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input class="weui-input" value="{{terminalId}}" disabled="true" />
+          </view>
+        </view>
+      </view>
+      <view class="weui-btn-area">
+        <button class="weui-btn" type="primary" formType="submit">保存</button>
+      </view>
+    </form>
+  </view>
+</view>
