@@ -1,0 +1,5 @@
+<!--index.wxml-->
+<view class="container">
+  <text>个人中心</text>
+</view>
+

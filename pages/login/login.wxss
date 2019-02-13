@@ -1,0 +1,36 @@
+/**index.wxss**/
+.container {
+    position: absolute; /*填充整个父组件*/
+    background-color: cornflowerblue;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+        
+
+.userinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* .userinfo-avatar {
+  width: 128rpx;
+  height: 128rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+}
+
+.userinfo-nickname {
+  color:lavender;
+} */
+
+button{
+  background-color:lightblue;
+  color:white;
+  width: 90%;
+  height: 40px;
+  font-size: 15px;
+  margin-top:20px;/*上边界*/
+}

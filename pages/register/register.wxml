@@ -1,0 +1,15 @@
+<view class="container">
+<image class="icon" src="/pics/hsmy.jpg" mode='aspectFit'></image>
+<form bindsubmit='formSubmit' bindreset='formReset'>
+  <view class="section">
+    <input class="items_one" type="text" name="mobileNo" bindinput='getMobileNo' placeholder="请输入手机号" required focus/>
+    <view class="seqs">
+      <input class="items_two" type="text" name="seqNos" bindinput='getSeqNos' placeholder="请输入验证码" focus="{{seqNos_focus}}" value='{{seqNos}}' required></input>
+      <button class="button_seq" disabled='{{disabled}}' bindtap='achieveSeqNos'>获取验证码</button>
+    </view>
+    <input class="items_one" type="text" name="roomNo" bindinput='getRoomNo' placeholder="请输入房号"/>
+  </view>
+  <button class="button_reg" form-type='submit'>注册</button>
+</form>
+</view>
+

@@ -1,0 +1,63 @@
+/**index.wxss**/
+
+
+.weather{
+  height: 150px
+}
+
+.weather image{
+  height: 150px;
+} 
+
+/**index.wxss**/
+.icons{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.icons button{
+  border-radius: 0;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-color: gainsboro;
+  border-width: 0.5px;
+}
+
+.icons button::after{
+  border-radius: 0
+}
+
+.icons image{
+  width: 25px;
+  height: 25px;
+}
+
+.icons text{
+  font-size: 10px;
+}
+
+.btn{
+  border-radius: 0
+}
+
+.btn::after{
+  border-radius:0
+}
+
+.images{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.images image{
+  width: 80px;
+  height: 80px;
+}
