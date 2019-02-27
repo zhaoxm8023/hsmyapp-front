@@ -108,7 +108,7 @@ Page({
     joinUs(app,this.data,function(data){
       if(data.status == '0'){
         wx.switchTab({
-          url: '../home/home',
+          url: '../main/main',
         })
       } else if (data.status == '1'){
         wx.showToast({
