@@ -22,5 +22,5 @@ App({
     userInfo: null,
     url: 'http://localhost:8000/app/',
     openId: '',
-  },
+  },  
 })

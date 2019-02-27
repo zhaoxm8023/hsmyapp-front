@@ -52,7 +52,7 @@ Page({
       },
       {
         name: '信息发布',
-        url: '/pages/main/main',
+        url: '/pages/infopub/infopub',
         icon: './pics/ui-8.png',
         code: '8'
       }
