@@ -1,5 +1,5 @@
 const app = getApp()
-
+var bmap = require('../../libs/bmap-wx.js'); 
 Page({
 
   /**
@@ -57,10 +57,8 @@ Page({
         icon: './pics/ui-8.png',
         code: '8'
       }
-
-
-
-    ]
+    ],
+    weatherData:''
 
   },
 
@@ -69,7 +67,25 @@ Page({
    */
   onLoad: function (options) {
     console.log('onLoad')
-    var that = this
+    var that = this;
+    //新建百度地图对象
+    var BMap = new bmap.BMapWX({ ak:'w5plbmpc0539geLczaIXptK5Z1iC2sP4'});
+    var fail = function(data){
+      console.log("查询天气失败！")
+    };
+    var success = function(data){
+      var weatherData = data.currentWeather[0];
+      console.log('currentCity:' + weatherData.currentCity);
+      console.log('weather:' + weatherData.weatherDesc);
+      weatherData = '城市：' + weatherData.currentCity + '\n' + 'PM2.5：' + weatherData.pm25 + '\n' + '日期：' + weatherData.date + '\n' + '温度：' + weatherData.temperature + '\n' + '天气：' + weatherData.weatherDesc + '\n' + '风力：' + weatherData.wind + '\n';
+      that.setData({
+        weatherData: weatherData
+      });
+    }
+    BMap.weather({
+      fail: fail,
+      success: success
+    });
   },
 
   /**

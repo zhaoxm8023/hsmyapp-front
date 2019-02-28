@@ -1,7 +1,7 @@
 {
   "pages":[
-    "pages/login/login",
     "pages/main/main",
+    "pages/login/login",
     "pages/infopub/infopub",
     "pages/addbook/addbook",
     "pages/register/register",
@@ -16,6 +16,12 @@
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "WeChat",
     "navigationBarTextStyle":"black"
+  },
+  "permission":{
+    "scope.userLocation":{
+      "desc":"您的位置信息将用于小程序位置接口的效果展示"
+    }
   }
+
 
 }

@@ -1,6 +1,6 @@
 <view class="container">
   <view class="weather">
-    <image src='pics/weather.jpg' mode='widthFix'></image>
+    <text>{{weatherData}}</text>
   </view>
     <view class="weui-grids">
         <view class="weui-grid" wx:for="{{routers}}" wx:key="name">
@@ -15,7 +15,7 @@
         </view>
     </view>
 
-  <i-tab-bar current="{{ current }}" bindchange="handleChange">
+  <i-tab-bar current="{{ current }}" bindchange="handleChange" fixed='true'>
     <i-tab-bar-item key="homepage" icon="homepage" current-icon="homepage_fill" title="Home">
     </i-tab-bar-item>
     <i-tab-bar-item key="group" icon="group" current-icon="group_fill" title="Friends">
