@@ -1,14 +1,14 @@
 <template name="infotemplate">
- <block wx:key = "{{index}}" wx:for = "{{listdata}}">  
-<view class="weui-list_template">
-              <view class="weui-cell">
-                  <view class="weui-cell__hd">
-                      <image src="{{item.icon}}" style="margin-right: 5px;vertical-align: middle;width:20px; height: 20px;"></image>
-                  </view>
-                  <view class="weui-cell__bd">{{item.demo1}}</view>
-                  <view class="weui-cell__ft">{{item.demo2}}</view>
-              </view>
-          </view>
-          </block>
-          </template>
+    <block wx:key = "{{index}}" wx:for = "{{listdata}}">
+        <view class="weui-list_template">
+            <view class="weui-cell">
+                <view class="weui-cell__hd">
+                    <image src="{{item.icon}}" style="margin-right: 5px;vertical-align: middle;width:20px; height: 20px;"></image>
+                </view>
+                <view class="weui-cell__bd">{{item.demo1}}</view>
+                <view class="weui-cell__ft">{{item.demo2}}</view>
+            </view>
+        </view>
+    </block>
+</template>
           

@@ -1,108 +1,101 @@
-     <import src = "infotemplate.wxml"/>
-      <view class="page">
-          <view class="page__bd">
-              <view class="weui-tab">
-                  <view class="weui-navbar">
-                      <block wx:for="{{tabs}}" wx:key="*this">
-                          <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
-                              <view class="weui-navbar__title">{{item}}</view>
-                          </view>
-                      </block>
-                      <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view> 
-                  </view>
-                  <view class="weui-tab__panel">
-                      <view class="weui-tab__content" hidden="{{activeIndex != 0}}">       
-
-                      <scroll-view class="scroll" scroll-top="{{100}}" scroll-y="true" bindscroll="scrll" bindscrolltolower="loadMore" style="height: {{scroll_height}}px;">
-        <template is="infotemplate" data="{{listdata}}"/> 
-  </scroll-view>
-          </view>
-
-
-                      <view class="weui-tab__content" hidden="{{activeIndex != 1}}">我发布过的信息列表</view>
-                      <view class="weui-tab_new_content" hidden="{{activeIndex != 2}}">
-                      <view class="weui-cells__title">标题</view>
-              <view class="weui-cells weui-cells_after-title">
-                  <view class="weui-cell weui-cell_input">
-                      <view class="weui-cell__bd">
-                          <input class="weui-input" placeholder="发布信息标题" />
-                      </view>
-                  </view>
-              </view>
-                <view class="weui-cells__title">文本域</view>
-            <view class="weui-cells weui-cells_after-title">
-                <view class="weui-cell">
-                    <view class="weui-cell__bd">
-                        <textarea class="weui-textarea" placeholder="请输入文本" style="height: 3.3em" />
-                        <view class="weui-textarea-counter">0/200</view>
+<import src = "infotemplate.wxml"/>
+<view class="page">
+    <view class="page__bd">
+        <view class="weui-tab">
+            <view class="weui-navbar">
+                <block wx:for="{{tabs}}" wx:key="*this">
+                    <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
+                        <view class="weui-navbar__title">{{item}}</view>
+                    </view>
+                </block>
+                <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
+            </view>
+            <view class="weui-tab__panel">
+                <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
+                    <scroll-view class="scroll" scroll-top="{{100}}" scroll-y="true" bindscroll="scrll" bindscrolltolower="loadMore" style="height: {{scroll_height}}px;">
+                        <template is="infotemplate" data="{{listdata}}"/>
+                    </scroll-view>
+                </view>
+                <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
+                    <scroll-view class="scroll" scroll-top="{{100}}" scroll-y="true" bindscroll="scrll" bindscrolltolower="loadMore" style="height: {{scroll_height}}px;">
+                        <template is="infotemplate" data="{{listdata}}"/>
+                    </scroll-view>
+                </view>
+                <view class="weui-tab_new_content" hidden="{{activeIndex != 2}}">
+                    <view class="weui-cells__title">标题</view>
+                    <view class="weui-cells weui-cells_after-title">
+                        <view class="weui-cell weui-cell_input">
+                            <view class="weui-cell__bd">
+                                <input class="weui-input" placeholder="发布信息标题" />
+                            </view>
+                        </view>
+                    </view>
+                    <view class="weui-cells__title">文本域</view>
+                    <view class="weui-cells weui-cells_after-title">
+                        <view class="weui-cell">
+                            <view class="weui-cell__bd">
+                                <textarea class="weui-textarea" placeholder="请输入文本" style="height: 3.3em" />
+                                <view class="weui-textarea-counter">0/200</view>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="weui-cells weui-cells_after-title">
+                        <view class="weui-cell weui-cell_select">
+                            <view class="weui-cell__hd" style="width: 105px">
+                                <picker bindchange="bindCountryCodeChange" value="{{countryCodeIndex}}" range="{{countryCodes}}">
+                                    <view class="weui-select">{{countryCodes[countryCodeIndex]}}</view>
+                                </picker>
+                            </view>
+                            <view class="weui-cell__bd weui-cell__bd_in-select-before">
+                                <input class="weui-input" placeholder="15355031006" />
+                            </view>
+                        </view>
+                    </view>
+                    <view class="weui-cell weui-cell_input">
+                        <view class="weui-cell__hd">
+                            <view class="weui-label">截止日期</view>
+                        </view>
+                        <view class="weui-cell__bd">
+                            <picker mode="date" value="{{date}}" start="2015-09-01" end="2017-09-01" bindchange="bindDateChange">
+                                <view class="weui-input">{{date}}</view>
+                            </picker>
+                        </view>
+                    </view>
+                    <view class="weui-cells weui-cells_after-title">
+                        <view class="weui-cell weui-cell_select">
+                            <view class="weui-cell__hd weui-cell__hd_in-select-after">
+                                <view class="weui-label">信息类型</view>
+                            </view>
+                            <view class="weui-cell__bd">
+                                <picker bindchange="bindCountryChange" value="{{countryIndex}}" range="{{countries}}">
+                                    <view class="weui-select weui-select_in-select-after">{{countries[countryIndex]}}</view>
+                                </picker>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="weui-uploader">
+                        <view class="weui-cell weui-cell_input">
+                            <view class="weui-uploader__title"> 图片上传</view>
+                            <view class="weui-uploader__info">{{files.length}}/2</view>
+                        </view>
+                        <view class="weui-uploader__bd">
+                            <view class="weui-uploader__files" id="uploaderFiles">
+                                <block wx:for="{{files}}" wx:key="*this">
+                                    <view class="weui-uploader__file" bindtap="previewImage" id="{{item}}">
+                                        <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" />
+                                    </view>
+                                </block>
+                            </view>
+                            <view class="weui-uploader__input-box">
+                                <view class="weui-uploader__input" bindtap="chooseImage"></view>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="weui-btn-area">
+                        <button class="weui-btn" type="primary" bindtap="showTopTips">发布</button>
                     </view>
                 </view>
             </view>
-
-            <view class="weui-cells weui-cells_after-title">
-                <view class="weui-cell weui-cell_select">
-                    <view class="weui-cell__hd" style="width: 105px">
-                        <picker bindchange="bindCountryCodeChange" value="{{countryCodeIndex}}" range="{{countryCodes}}">
-                            <view class="weui-select">{{countryCodes[countryCodeIndex]}}</view>
-                        </picker>
-                    </view>
-                    <view class="weui-cell__bd weui-cell__bd_in-select-before">
-                        <input class="weui-input" placeholder="15355031006" />
-                    </view>
-                </view>
-            </view>
-
-            <view class="weui-cell weui-cell_input">
-                  <view class="weui-cell__hd">
-                      <view class="weui-label">截止日期</view>
-                  </view>
-                  <view class="weui-cell__bd">
-                      <picker mode="date" value="{{date}}" start="2015-09-01" end="2017-09-01" bindchange="bindDateChange">
-                          <view class="weui-input">{{date}}</view>
-                      </picker>
-                  </view>
-              </view>
-
-              <view class="weui-cells weui-cells_after-title">
-              <view class="weui-cell weui-cell_select">
-                  <view class="weui-cell__hd weui-cell__hd_in-select-after">
-                      <view class="weui-label">信息类型</view>
-                  </view>
-                  <view class="weui-cell__bd">
-                      <picker bindchange="bindCountryChange" value="{{countryIndex}}" range="{{countries}}">
-                          <view class="weui-select weui-select_in-select-after">{{countries[countryIndex]}}</view>
-                      </picker>
-                  </view>
-              </view>
-          </view>
-
-
-        <view class="weui-uploader">
-                          <view class="weui-cell weui-cell_input">
-                              <view class="weui-uploader__title"> 图片上传</view>
-                              <view class="weui-uploader__info">{{files.length}}/2</view>
-                          </view>
-                          <view class="weui-uploader__bd">
-                              <view class="weui-uploader__files" id="uploaderFiles">
-                                  <block wx:for="{{files}}" wx:key="*this">
-                                      <view class="weui-uploader__file" bindtap="previewImage" id="{{item}}">
-                                          <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" />
-                                      </view>
-                                  </block>
-                              </view>
-                              <view class="weui-uploader__input-box">
-                                  <view class="weui-uploader__input" bindtap="chooseImage"></view>
-                              </view>
-                          </view>
-                      </view>
-        
-
-        <view class="weui-btn-area">
-              <button class="weui-btn" type="primary" bindtap="showTopTips">发布</button>
-          </view>
-
-              </view>
-                  </view>
-              </view>
-          </view>
-      </view>
+        </view>
+    </view>
+</view>
