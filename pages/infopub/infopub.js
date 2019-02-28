@@ -18,12 +18,39 @@ Page({
     accountIndex: 0,
 
     isAgree: false,
-    files: []
+    files: [],
+    //后续做后台拉取的json 列表格式
+    listdata : [
+      {
+        demo1:"1",
+        demo2:"2"
+      },
+
+      {
+        demo1: "3",
+        demo2: "4"},
+
+      {
+        demo1: "1",
+        demo2: "2"},
+      {
+        demo1: "1",
+        demo2: "2"
+      },
+      {
+        demo1: "1",
+        demo2: "2"
+      },
+      
+      
+
+
+    ]
   },
   onLoad: function () {
     var that = this;
     this.setData({
-      icon: base64.icon20
+      icon: './pics/icon20.png'
     });
     wx.getSystemInfo({
       success: function (res) {

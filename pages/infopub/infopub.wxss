@@ -11,6 +11,11 @@ page,
     text-align: center;
 }
 
+.weui-cells_after-title{
+  padding-top: 0px;
+    text-align: left;
+}
+
 .weui-tab_new_content {
     padding-top: 10px;
     text-align: left;
