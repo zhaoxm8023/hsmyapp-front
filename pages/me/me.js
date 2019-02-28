@@ -7,7 +7,10 @@ Page({
     motto: 'Hello World',
     userInfo: {},
     hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    icon : '../pics/icon20.png',
+    wechatname : '先明'
+
   },
   //事件处理函数
   bindViewTap: function() {

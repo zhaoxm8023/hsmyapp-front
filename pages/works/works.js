@@ -7,7 +7,61 @@ Page({
     motto: 'Hello World',
     userInfo: {},
     hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    //后续做后台拉取的json 列表格式
+    listdata: [
+      {
+        demo1: "1",
+        demo2: "2",
+        icon: '../pics/icon20.png'
+      },
+
+      {
+        demo1: "3",
+        demo2: "4",
+        icon: '../pics/icon20.png'
+      },
+
+
+      {
+        demo1: "1",
+        demo2: "2",
+        icon: '../pics/icon20.png'
+      },
+      {
+        demo1: "1",
+        demo2: "2",
+        icon: '../pics/icon20.png'
+      },
+      {
+        demo1: "1",
+        demo2: "2",
+        icon: '../pics/icon20.png'
+      },
+      {
+        demo1: "1",
+        demo2: "2",
+        icon: '../pics/icon20.png'
+      },
+      {
+        demo1: "1",
+        demo2: "2",
+        icon: '../pics/icon20.png'
+      },
+      {
+        demo1: "1",
+        demo2: "2",
+        icon: '../pics/icon20.png'
+      },
+      {
+        demo1: "1",
+        demo2: "2",
+        icon: '../pics/icon20.png'
+      }
+
+
+
+    ]
   },
   //事件处理函数
   bindViewTap: function() {

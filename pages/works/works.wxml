@@ -1,5 +1,7 @@
-<!--index.wxml-->
+<import src = "../template/infotemplate.wxml"/>
 <view class="container">
-  <text>待办事项</text>
+  <scroll-view class="scroll" scroll-top="{{100}}" scroll-y="true" bindscroll="scrll" bindscrolltolower="loadMore" style="height: {{scroll_height}}px;">
+                        <template is="infotemplate" data="{{listdata}}"/>
+                    </scroll-view>
 </view>
 

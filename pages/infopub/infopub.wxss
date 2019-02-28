@@ -25,3 +25,6 @@ page,
    padding: 20rpx;
    border-bottom: 20rpx solid #fafafa;
 } 
+
+
+.weui-media-box__title{font-weight:400;font-size:16px;width:auto;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;word-wrap:normal;word-wrap:break-word;word-break:break-all}

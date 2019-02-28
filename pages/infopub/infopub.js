@@ -24,49 +24,49 @@ Page({
       {
         demo1:"1",
         demo2:"2",
-        icon: './pics/icon20.png'
+        icon: '../pics/icon20.png'
       },
 
       {
         demo1: "3",
         demo2: "4",
-         icon: './pics/icon20.png'
+         icon: '../pics/icon20.png'
          },
         
 
       {
         demo1: "1",
         demo2: "2",
-        icon: './pics/icon20.png'},
+        icon: '../pics/icon20.png'},
       {
         demo1: "1",
         demo2: "2",
-         icon: './pics/icon20.png'
+         icon: '../pics/icon20.png'
       },
       {
         demo1: "1",
         demo2: "2",
-        icon: './pics/icon20.png'
+        icon: '../pics/icon20.png'
       },
       {
         demo1: "1",
         demo2: "2",
-        icon: './pics/icon20.png'
+        icon: '../pics/icon20.png'
       },
       {
         demo1: "1",
         demo2: "2",
-        icon: './pics/icon20.png'
+        icon: '../pics/icon20.png'
       },
       {
         demo1: "1",
         demo2: "2",
-        icon: './pics/icon20.png'
+        icon: '../pics/icon20.png'
       },
       {
         demo1: "1",
         demo2: "2",
-        icon: './pics/icon20.png'
+        icon: '../pics/icon20.png'
       }
       
 

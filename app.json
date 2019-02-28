@@ -8,7 +8,9 @@
     "pages/index/index",
     "pages/logs/logs",
     "pages/works/works",
-    "pages/me/me"
+    "pages/me/me",
+    "pages/me/aboutme/aboutme",
+    "pages/me/appadvice/appadvice"
    
   ],
   "window":{
@@ -21,7 +23,29 @@
     "scope.userLocation":{
       "desc":"您的位置信息将用于小程序位置接口的效果展示"
     }
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/main/main",
+        "text": "首页",
+        "iconPath": "pics/icon-home-1.png",
+        "selectedIconPath": "pics/icon-home-2.png"
+      },
+      {
+        "pagePath": "pages/works/works",
+        "text": "待办",
+        "iconPath": "pics/icon-works-1.png",
+        "selectedIconPath": "pics/icon-works-2.png"
+      },
+      {
+        "pagePath": "pages/me/me",
+        "text": "我",
+        "iconPath": "pics/icon-me-1.png",
+        "selectedIconPath": "pics/icon-me-2.png"
+      }
+    ],
+    "position": "bottom"
   }
-
 
 }
