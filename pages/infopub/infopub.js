@@ -23,25 +23,51 @@ Page({
     listdata : [
       {
         demo1:"1",
-        demo2:"2"
+        demo2:"2",
+        icon: './pics/icon20.png'
       },
 
       {
         demo1: "3",
-        demo2: "4"},
+        demo2: "4",
+         icon: './pics/icon20.png'
+         },
+        
 
       {
         demo1: "1",
-        demo2: "2"},
+        demo2: "2",
+        icon: './pics/icon20.png'},
       {
         demo1: "1",
-        demo2: "2"
+        demo2: "2",
+         icon: './pics/icon20.png'
       },
       {
         demo1: "1",
-        demo2: "2"
+        demo2: "2",
+        icon: './pics/icon20.png'
       },
-      
+      {
+        demo1: "1",
+        demo2: "2",
+        icon: './pics/icon20.png'
+      },
+      {
+        demo1: "1",
+        demo2: "2",
+        icon: './pics/icon20.png'
+      },
+      {
+        demo1: "1",
+        demo2: "2",
+        icon: './pics/icon20.png'
+      },
+      {
+        demo1: "1",
+        demo2: "2",
+        icon: './pics/icon20.png'
+      }
       
 
 
@@ -50,13 +76,15 @@ Page({
   onLoad: function () {
     var that = this;
     this.setData({
-      icon: './pics/icon20.png'
+     
     });
     wx.getSystemInfo({
       success: function (res) {
         that.setData({
           sliderLeft: (res.windowWidth / that.data.tabs.length - sliderWidth) / 2,
-          sliderOffset: res.windowWidth / that.data.tabs.length * that.data.activeIndex
+          sliderOffset: res.windowWidth / that.data.tabs.length * that.data.activeIndex,
+          scroll_height: res.windowHeight - res.windowWidth / 750 * 165
+
         });
       }
     });

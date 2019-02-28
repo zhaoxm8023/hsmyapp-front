@@ -20,3 +20,8 @@ page,
     padding-top: 10px;
     text-align: left;
 }
+
+.weui-list_template {
+   padding: 20rpx;
+   border-bottom: 20rpx solid #fafafa;
+} 
