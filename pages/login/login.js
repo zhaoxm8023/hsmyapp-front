@@ -43,7 +43,7 @@ Page({
         })
       } else if (isRegit == '0'){
         console.log("============已注册！============")
-        wx.switchTab({
+        wx.navigateTo({
           url: '../main/main',
         })
       }

@@ -1,9 +1,9 @@
 {
   "pages":[
+    "pages/login/login",
     "pages/main/main",
     "pages/infopub/infopub",
     "pages/addbook/addbook",
-    "pages/login/login",
     "pages/register/register",
     "pages/index/index",
     "pages/logs/logs",
@@ -16,28 +16,6 @@
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "WeChat",
     "navigationBarTextStyle":"black"
-  },
-  "tabBar": {
-    "list": [
-      {
-        "pagePath": "pages/main/main",
-        "text": "首页",
-        "iconPath": "pics/icon-home-1.png",
-        "selectedIconPath": "pics/icon-home-2.png"
-      },
-      {
-        "pagePath": "pages/works/works",
-        "text": "待办",
-        "iconPath": "pics/icon-works-1.png",
-        "selectedIconPath":"pics/icon-works-2.png"
-      },
-      {
-        "pagePath": "pages/me/me",
-        "text": "我",
-        "iconPath": "pics/icon-me-1.png",
-        "selectedIconPath": "pics/icon-me-2.png"
-      }
-    ],
-    "position":"bottom"
   }
+
 }

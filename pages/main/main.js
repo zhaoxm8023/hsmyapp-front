@@ -7,6 +7,7 @@ Page({
    * 后续可以url 通过web查询得来 进行动态的进行页面灰度发布
    */
   data: {
+    current: 'homepage',
     routers: [
       {
         name: '通讯录',
@@ -118,5 +119,14 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  /**
+   * tab-bar处理
+   */
+  handleChange({ detail }) {
+    this.setData({
+      current: detail.key
+    });
   }
 })

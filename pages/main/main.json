@@ -3,5 +3,9 @@
   "navigationBarTextStyle": "black",
   "navigationBarTitleText": "海上明月主页面",
   "backgroundColor": "#eeeeee",
-  "backgroundTextStyle": "light"
+  "backgroundTextStyle": "light",
+  "usingComponents": {
+    "i-tab-bar": "../../dist/tab-bar/index",
+    "i-tab-bar-item": "../../dist/tab-bar-item/index"
+  }
 }
