@@ -1,6 +1,8 @@
 <view class="container">
   <view class="weather">
-    <text>{{weatherData}}</text>
+    <image class="weather_img" src="pics/wb-{{weather}}.jpeg" mode='widthFix'></image>
+    <image class="weather_icon" src="pics/wc-{{weather}}.png" mode='widthFix'></image>
+    <text class="weather_text">{{weatherData}}</text>
   </view>
     <view class="weui-grids">
         <view class="weui-grid" wx:for="{{routers}}" wx:key="name">

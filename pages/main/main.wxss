@@ -117,11 +117,31 @@ page {
     overflow: hidden;
 }
 
-
-
-.weather image{
-  display:flex;
-  width: 100%;
-  justify-content: center;
-  align-items:center;
+.weather{
+  display: flex;
+  position: relative;
 }
+
+.weather_img{
+  width: 100%
+}
+
+
+.weather_icon{
+  position:absolute;
+  top:0;
+  left: 0;
+  right: 0;
+  width: 30%;
+  margin: auto;
+}
+
+.weather_text{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+  color: white;
+  font-size: 35rpx;
+}
+

@@ -58,7 +58,8 @@ Page({
         code: '8'
       }
     ],
-    weatherData:''
+    weatherData:'',
+    weather:'1'
 
   },
 
@@ -75,9 +76,27 @@ Page({
     };
     var success = function(data){
       var weatherData = data.currentWeather[0];
+      var weather = weatherData.weatherDesc;
       console.log('currentCity:' + weatherData.currentCity);
-      console.log('weather:' + weatherData.weatherDesc);
-      weatherData = '城市：' + weatherData.currentCity + '\n' + 'PM2.5：' + weatherData.pm25 + '\n' + '日期：' + weatherData.date + '\n' + '温度：' + weatherData.temperature + '\n' + '天气：' + weatherData.weatherDesc + '\n' + '风力：' + weatherData.wind + '\n';
+      console.log('weather:' + weather);
+      if (weather.indexOf("晴") != -1){
+        that.setData({
+          weather: '1'
+        });
+      } else if (weather.indexOf("多云") != -1){
+        that.setData({
+          weather: '2'
+        });
+      } else if (weather.indexOf("雨") != -1){
+        that.setData({
+          weather: '3'
+        });
+      } else if (weather.indexOf("雪") != -1){
+        that.setData({
+          weather: '4'
+        });
+      }
+      weatherData = weatherData.currentCity + '\n' + weatherData.temperature + '\n' + weatherData.weatherDesc + '\n';
       that.setData({
         weatherData: weatherData
       });
