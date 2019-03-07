@@ -73,22 +73,18 @@
                             </view>
                         </view>
                     </view>
-                    
-                   <text class='picture_text'>图片上传</text>
-                   <view class="picture_list">   
-                      <view wx:for="{{img_url}}" class="picture_item" wx:key="{{index}}">
-                        <image class="moment_img" mode="aspectFill" data-index='{{index}}' src="{{item}}" bindtap="previewImg"></image>
-                        <text class='del' bindtap='deleteImg' data-src='{{image}}' style='display:{{isDel}}' data-index="{{index}}">×</text>
-                      </view>
-                      <view class='picture_item'>
-                        <view class="add-image" bindtap='chooseimage' style='display:{{hideAdd?"none":"block"}}'>
-                        <text>+</text>
-                      </view>
-                  </view>
-
-                </view>
-
-
+                    <text class='picture_text'>图片上传</text>
+                    <view class="picture_list">
+                        <view wx:for="{{img_url}}" class="picture_item" wx:key="{{index}}">
+                            <image class="moment_img" mode="aspectFill" data-index='{{index}}' src="{{item}}" bindtap="previewImg"></image>
+                            <text class='del' bindtap='deleteImg' data-src='{{image}}' style='display:{{isDel}}' data-index="{{index}}">×</text>
+                        </view>
+                        <view class='picture_item'>
+                            <view class="add-image" bindtap='chooseimage' style='display:{{hideAdd?"none":"block"}}'>
+                                <text>+</text>
+                            </view>
+                        </view>
+                    </view>
                     <view class="weui-btn-area">
                         <button class="weui-btn" type="primary" bindtap="showTopTips">发布</button>
                     </view>

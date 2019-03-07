@@ -1,4 +1,4 @@
-import { infoPub } from "../../service/service.js"
+import { infoPub, uploadImages } from "../../service/service.js"
 var sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位置
 var util = require('../../utils/util.js');
 //获取应用实例
@@ -75,10 +75,16 @@ Page({
         demo2: "2",
         icon: '../pics/icon20.png'
       }
-      
+    ],
+    countPic: 9,//上传图片最大数量
+    showImgUrl: "", //路径拼接，一般上传返回的都是文件名，
+    uploadImgUrl: ''//图片的上传的路径
+  },
 
-
-    ]
+   //监听组件事件，返回的结果
+  myEventListener:function(e){
+   console.log("上传的图片结果集合")
+   console.log(e.detail.picsList)
   },
   onLoad: function () {
     var that = this;
@@ -205,13 +211,24 @@ Page({
     wx.showLoading({
       title: '发布中--',
     })
-    infoPub(this, this.data, function (data) {
+    uploadImages(app, this.data, function (data) {
+      console.log(data)
       if (data.status == '0') {
-        console.log('发布信息成功！')
+        console.log('发布信息成功！返回主键 ： ' + data.payload.infoSerno)
         wx.hideLoading()
-        var infoSero = data.payload
-        //接下来上传图片
-
+        var infoSerno = data.payload.infoSerno
+        // //接下来上传图片
+        // uploadImages(app, data, infoSerno, function(resData){
+        //   if (resData.status == '0') {
+        //     wx.hideLoading()
+        //     //提示发布成功
+        //     console.log('发布成功！')
+        //   } else if (resData.status == '1') {
+        //     wx.showToast({
+        //       title: resData.responseCode,
+        //     })
+          //}
+        //})
       } else if (data.status == '1') {
         wx.showToast({
           title: data.responseCode,

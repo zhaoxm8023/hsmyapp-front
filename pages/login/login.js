@@ -38,12 +38,12 @@ Page({
     isRegister(app,app.globalData.openId,function(isRegit){
       console.log("=========status:" + isRegit)
       if(isRegit == '1'){
-        wx.navigateTo({
+        wx.switchTab({
           url: '../register/register',
         })
       } else if (isRegit == '0'){
         console.log("============已注册！============")
-        wx.navigateTo({
+        wx.switchTab({
           url: '../main/main',
         })
       }

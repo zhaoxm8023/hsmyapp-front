@@ -1,4 +1,6 @@
 {
-  "usingComponents": {},
-  "navigationBarTitleText": "小区信息发布"
+  "navigationBarTitleText": "小区信息发布",
+  "usingComponents": {
+    "uploadImages": "/component/uploadImages/index"
+  }
 }
