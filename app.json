@@ -1,8 +1,8 @@
 {
   "pages":[
+    "pages/infopub/infopub",
     "pages/main/main",
     "pages/login/login",
-    "pages/infopub/infopub",
     "pages/addbook/addbook",
     "pages/register/register",
     "pages/index/index",

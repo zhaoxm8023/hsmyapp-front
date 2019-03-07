@@ -26,7 +26,7 @@
                     <view class="weui-cells weui-cells_after-title">
                         <view class="weui-cell weui-cell_input">
                             <view class="weui-cell__bd">
-                                <input class="weui-input" placeholder="发布信息标题" />
+                                <input class="weui-input" name = 'infoTitle' placeholder="发布信息标题" bindinput='getinfoTitle'/>
                             </view>
                         </view>
                     </view>
@@ -34,7 +34,7 @@
                     <view class="weui-cells weui-cells_after-title">
                         <view class="weui-cell">
                             <view class="weui-cell__bd">
-                                <textarea class="weui-textarea" placeholder="请输入文本" style="height: 3.3em" />
+                                <textarea class="weui-textarea" name = 'infoDesc' placeholder="请输入文本" style="height: 3.3em" bindinput='getinfoDesc'/>
                                 <view class="weui-textarea-counter">0/200</view>
                             </view>
                         </view>
@@ -47,7 +47,7 @@
                                 </picker>
                             </view>
                             <view class="weui-cell__bd weui-cell__bd_in-select-before">
-                                <input class="weui-input" placeholder="15355031006" />
+                                <input class="weui-input" name='mobileNo' placeholder="手机号" bindinput='getmobileNo'/>
                             </view>
                         </view>
                     </view>
@@ -56,8 +56,8 @@
                             <view class="weui-label">截止日期</view>
                         </view>
                         <view class="weui-cell__bd">
-                            <picker mode="date" value="{{date}}" start="2015-09-01" end="2017-09-01" bindchange="bindDateChange">
-                                <view class="weui-input">{{date}}</view>
+                            <picker mode="date" value="{{infoEnddata}}" start="2015-09-01" end="2040-09-01" bindchange="bindDateChange">
+                                <view class="weui-input">{{infoEnddata}}</view>
                             </picker>
                         </view>
                     </view>
@@ -67,30 +67,28 @@
                                 <view class="weui-label">信息类型</view>
                             </view>
                             <view class="weui-cell__bd">
-                                <picker bindchange="bindCountryChange" value="{{countryIndex}}" range="{{countries}}">
-                                    <view class="weui-select weui-select_in-select-after">{{countries[countryIndex]}}</view>
+                                <picker bindchange="bindCountryChange" value="{{infoEnum}}" range="{{infoTypes}}">
+                                    <view class="weui-select weui-select_in-select-after">{{infoTypes[infoEnum]}}</view>
                                 </picker>
                             </view>
                         </view>
                     </view>
-                    <view class="weui-uploader">
-                        <view class="weui-cell weui-cell_input">
-                            <view class="weui-uploader__title"> 图片上传</view>
-                            <view class="weui-uploader__info">{{files.length}}/2</view>
-                        </view>
-                        <view class="weui-uploader__bd">
-                            <view class="weui-uploader__files" id="uploaderFiles">
-                                <block wx:for="{{files}}" wx:key="*this">
-                                    <view class="weui-uploader__file" bindtap="previewImage" id="{{item}}">
-                                        <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" />
-                                    </view>
-                                </block>
-                            </view>
-                            <view class="weui-uploader__input-box">
-                                <view class="weui-uploader__input" bindtap="chooseImage"></view>
-                            </view>
-                        </view>
-                    </view>
+                    
+                   <text class='picture_text'>图片上传</text>
+                   <view class="picture_list">   
+                      <view wx:for="{{img_url}}" class="picture_item" wx:key="{{index}}">
+                        <image class="moment_img" mode="aspectFill" data-index='{{index}}' src="{{item}}" bindtap="previewImg"></image>
+                        <text class='del' bindtap='deleteImg' data-src='{{image}}' style='display:{{isDel}}' data-index="{{index}}">×</text>
+                      </view>
+                      <view class='picture_item'>
+                        <view class="add-image" bindtap='chooseimage' style='display:{{hideAdd?"none":"block"}}'>
+                        <text>+</text>
+                      </view>
+                  </view>
+
+                </view>
+
+
                     <view class="weui-btn-area">
                         <button class="weui-btn" type="primary" bindtap="showTopTips">发布</button>
                     </view>

@@ -69,4 +69,42 @@ function joinUs(app,data,cb){
   })
 }
 
-export { getOpenId, isRegister, joinUs, getMobileSeqNos }
+function infoPub(that,data,cb){
+  wx.request({
+    url: that.globalData.url + '/hsmy/infopub',
+    data:{
+      openId: data.openId,
+      mobileNo: data.mobileNo,
+      infoTitle: data.infoTitle,
+      infoEnum: data.infoEnum,
+      infoEnddata: data.infoEnddata,
+      infoDesc: data.infoDesc
+    },
+    method: 'POST',
+    success: function (res) {
+      console.log("==================success============")
+      console.log("==================res.status=========" + res.data.status)
+      console.log("==================res.responseCode===" + res.data.responseCode)
+      typeof cb == "function" && cb(res.data)
+    },
+    fail: function (res) {
+      console.log("==================fail================")
+    }
+  })
+
+}
+
+function uploadImages(that,data,infoSero){
+  var count = data.img_url.length
+
+  wx.uploadFile({
+    url: that.globalData.url + '/hsmy/infopub/uploadImage',
+    filePath: img_url[count],
+    name: 'file',
+    formData: {
+      goodsId: goodsId
+    },
+  })
+}
+
+export { getOpenId, isRegister, joinUs, getMobileSeqNos, infoPub }

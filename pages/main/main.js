@@ -83,7 +83,7 @@ Page({
         that.setData({
           weather: '1'
         });
-      } else if (weather.indexOf("多云") != -1){
+      } else if (weather.indexOf("阴") != -1){
         that.setData({
           weather: '2'
         });

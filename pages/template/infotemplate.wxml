@@ -7,8 +7,10 @@
                         <image class="weui-media-box__thumb" src="{{item.icon}}" />
                     </view>
                     <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                        <view class="weui-media-box__kind">类型</view>
                         <view class="weui-media-box__title">小标题</view>
-                        <view class="weui-media-box__desc">详细描述。。。。。。。</view>
+                        <view class="weui-media-box__desc">我的模版</view>
+                        <view class="weui-media-box__time">时间</view>
                     </view>
                 </navigator>
             </view>
