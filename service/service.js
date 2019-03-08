@@ -1,4 +1,4 @@
-
+var curIndex = 0
 function getOpenId(that,code,cb) {
   if (that.globalData.openId) {
     // 如果是函数，则调用
@@ -93,34 +93,34 @@ function infoPub(app,data,cb){
   })
 }
 
-function uploadImages(app, data, cb){
+ function uploadImages(app, data, cb){
   console.log(data)
   var that = this
   var count = data.img_url.length
-  var i = 0
+  var infopubstring = {
+    "openId": app.globalData.openId,
+    "mobileNo": data.mobileNo,
+    "infoTitle": data.infoTitle,
+    "infoEnum": data.infoEnum,
+    "infoEnddata": data.infoEnddata,
+    "infoDesc": data.infoDesc
+  }
   wx.showLoading({
     title: '上传中...',
     mask: true,
   })
   wx.uploadFile({
     url: app.globalData.url + 'hsmy/infopub',
-    filePath: data.img_url[i],
+    filePath: data.img_url[curIndex],
     name: 'infopubfiles',
     formData: {
-      data: {
-        openId: data.openId,
-        mobileNo: data.mobileNo,
-        infoTitle: data.infoTitle,
-        infoEnum: data.infoEnum,
-        infoEnddata: data.infoEnddata,
-        infoDesc: data.infoDesc
-      },
-      maxCount: count,
-      curIndex: i,
+      dataInfo: JSON.stringify(infopubstring),
+      maxCount: count - 1,
+      curIndex: curIndex,
       picsSerno: data.picsSerno,
       },
     header:{
-      openid: data.openId,
+       openId: app.globalData.openId,
       'content-type': 'multipart/form-data'
       //add tokenKey Authorization
     },
@@ -132,21 +132,21 @@ function uploadImages(app, data, cb){
       
     },
     complete: function(res) {
-      i++;
+      curIndex++;
       var response = JSON.parse(res.data)
       console.log(response)
       //如果失败，则返回
-      if(response.status == 500){
+      if(response.status == 1){
         typeof cb == "function" && cb(res.data)
         wx.showToast({
           title: response.msg,
         });
       }
-      if (i == count) { //当图片传完时，停止调用     
+      if (curIndex == count) { //当图片传完时，停止调用     
         console.log('执行完毕');
-        console.log('成功：' + success + " 失败：" + fail);
+        //console.log('成功：' + success + " 失败：" + fail);
         wx.hideLoading()
-        if (response.status == 200){
+        if (response.status == 0){
           //全部上传成功，也返回
           typeof cb == "function" && cb(res.data)
           wx.hideLoading();
@@ -154,9 +154,10 @@ function uploadImages(app, data, cb){
             title: '上传成功!~~',
             icon: 'success'
           });
+          curIndex = 0
         } 
       } else { //若图片还没有传完，则继续调用函数
-        that.uploadimg(app, data, cb);
+        uploadImages(app, data, cb);
       }
     }
   })
