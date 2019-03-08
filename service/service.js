@@ -95,6 +95,7 @@ function infoPub(app,data,cb){
 
 function uploadImages(app, data, cb){
   console.log(data)
+  var that = this
   var count = data.img_url.length
   var i = 0
   wx.showLoading({
@@ -114,43 +115,48 @@ function uploadImages(app, data, cb){
         infoEnddata: data.infoEnddata,
         infoDesc: data.infoDesc
       },
-      user:'test'
+      maxCount: count,
+      curIndex: i,
+      picsSerno: data.picsSerno,
       },
     header:{
-      openid:data.openid,
+      openid: data.openId,
       'content-type': 'multipart/form-data'
       //add tokenKey Authorization
     },
     method: 'POST',
     success: (resp) => {
-      wx.hideLoading();
-      success++;
-      var str = resp.data //返回的结果，可能不同项目结果不一样
-      var pic = JSON.parse(str);
-      typeof cb == "function" && cb(res.data)
-      // var pic_name = resp.data.infoDesc + pic.Data;
-      // var detailPics = that.data.detailPics;
-      // detailPics.push(pic_name)
-      // that.setData({
-      //   detailPics: detailPics
-      // })
+      
     },
     fail: (res) => {
-      fail++;
-      console.log('fail:' + i + "fail:" + fail);
+      
     },
-    complete: () => {
+    complete: function(res) {
       i++;
+      var response = JSON.parse(res.data)
+      console.log(response)
+      //如果失败，则返回
+      if(response.status == 500){
+        typeof cb == "function" && cb(res.data)
+        wx.showToast({
+          title: response.msg,
+        });
+      }
       if (i == count) { //当图片传完时，停止调用     
         console.log('执行完毕');
         console.log('成功：' + success + " 失败：" + fail);
-        var myEventDetail = {
-          //picsList: that.data.detailPics
-        } // detail对象，提供给事件监听函数
-        var myEventOption = {} // 触发事件的选项
-        that.triggerEvent('myevent', myEventDetail, myEventOption)
+        wx.hideLoading()
+        if (response.status == 200){
+          //全部上传成功，也返回
+          typeof cb == "function" && cb(res.data)
+          wx.hideLoading();
+          wx.showToast({
+            title: '上传成功!~~',
+            icon: 'success'
+          });
+        } 
       } else { //若图片还没有传完，则继续调用函数
-        that.uploadimg(data);
+        that.uploadimg(app, data, cb);
       }
     }
   })

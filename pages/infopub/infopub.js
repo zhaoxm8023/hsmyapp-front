@@ -14,6 +14,7 @@ Page({
     infoTitle:'',
     mobileNo:'',
     openId: app.globalData.openId,
+    picsSerno:'',
 
     countryCodes: ["+86", "+80", "+84", "+87"],
     countryCodeIndex: 0,
@@ -207,6 +208,11 @@ Page({
 
   showTopTips: function(e) {
     var that = this
+    var picsSerno = util.getRandomCode(12)
+    console.log(picsSerno)
+    this.setData({
+      picsSerno: picsSerno
+    })
     console.log(e)
     wx.showLoading({
       title: '发布中--',
@@ -216,19 +222,7 @@ Page({
       if (data.status == '0') {
         console.log('发布信息成功！返回主键 ： ' + data.payload.infoSerno)
         wx.hideLoading()
-        var infoSerno = data.payload.infoSerno
-        // //接下来上传图片
-        // uploadImages(app, data, infoSerno, function(resData){
-        //   if (resData.status == '0') {
-        //     wx.hideLoading()
-        //     //提示发布成功
-        //     console.log('发布成功！')
-        //   } else if (resData.status == '1') {
-        //     wx.showToast({
-        //       title: resData.responseCode,
-        //     })
-          //}
-        //})
+        
       } else if (data.status == '1') {
         wx.showToast({
           title: data.responseCode,
