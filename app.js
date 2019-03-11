@@ -9,7 +9,6 @@ App({
        success(res){
         getOpenId(that,res.code,function(openId){
         that.globalData.openId=openId
-        app.globalData.openId = openId
        })
        console.log("===========url:" + that.globalData.url)
        console.log("===========openId:" + that.globalData.openId)

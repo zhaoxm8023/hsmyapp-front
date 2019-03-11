@@ -219,9 +219,9 @@ Page({
     })
     uploadImages(app, this.data, function (data) {
       console.log(data)
-      if (data.status == '0') {
+      if (data.status == 0) {
         console.log('发布信息成功！返回主键 ： ' + data.payload.infoSerno)
-        wx.hideLoading()
+        that.tabClick()
         
       } else if (data.status == '1') {
         wx.showToast({
