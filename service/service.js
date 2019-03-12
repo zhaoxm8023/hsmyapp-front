@@ -95,6 +95,7 @@ function infoPub(app,data,cb){
 
  function uploadImages(app, data, cb){
   console.log(data)
+  console.log(curIndex)
   var that = this
   var count = data.img_url.length
   var infopubstring = {
@@ -133,27 +134,29 @@ function infoPub(app,data,cb){
     },
     complete: function(res) {
       curIndex++;
+      console.log(res)
+      console.log(res.errMsg)
+      if(typeof res.data == "undefined"){
+        wx.hideLoading()
+        wx.showToast({
+          title: res.errMsg,
+        });
+        curIndex = 0
+        return
+      }
       var response = JSON.parse(res.data)
-      console.log(response)
       //如果失败，则返回
       if(response.status == 1){
-        typeof cb == "function" && cb(res.data)
-        wx.showToast({
-          title: response.msg,
-        });
+        typeof cb == "function" && cb(response)
+        curIndex = 0
+        return
       }
       if (curIndex == count) { //当图片传完时，停止调用     
         console.log('执行完毕');
         //console.log('成功：' + success + " 失败：" + fail);
-        wx.hideLoading()
         if (response.status == 0){
           //全部上传成功，也返回
-          typeof cb == "function" && cb(res.data)
-          wx.hideLoading();
-          wx.showToast({
-            title: '上传成功!~~',
-            icon: 'success'
-          });
+          typeof cb == "function" && cb(response)
           curIndex = 0
         } 
       } else { //若图片还没有传完，则继续调用函数

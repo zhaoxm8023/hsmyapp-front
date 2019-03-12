@@ -26,7 +26,7 @@
                     <view class="weui-cells weui-cells_after-title">
                         <view class="weui-cell weui-cell_input">
                             <view class="weui-cell__bd">
-                                <input class="weui-input" name = 'infoTitle' placeholder="发布信息标题" bindinput='getinfoTitle'/>
+                                <input class="weui-input" id = 'infoTitle' value = '{{infoTitle}}' placeholder="发布信息标题" bindinput='getinfoTitle' maxlength='20'/>
                             </view>
                         </view>
                     </view>
@@ -34,7 +34,7 @@
                     <view class="weui-cells weui-cells_after-title">
                         <view class="weui-cell">
                             <view class="weui-cell__bd">
-                                <textarea class="weui-textarea" name = 'infoDesc' placeholder="请输入文本" style="height: 3.3em" bindinput='getinfoDesc'/>
+                                <textarea class="weui-textarea" id = 'infoDesc' value='{{infoDesc}}' placeholder="请输入文本" style="height: 3.3em" bindinput='getinfoDesc' maxlength='200'/>
                                 <view class="weui-textarea-counter">0/200</view>
                             </view>
                         </view>
@@ -47,7 +47,7 @@
                                 </picker>
                             </view>
                             <view class="weui-cell__bd weui-cell__bd_in-select-before">
-                                <input class="weui-input" name='mobileNo' placeholder="手机号" bindinput='getmobileNo'/>
+                                <input class="weui-input" id='mobileNo' value='{{mobileNo}}' placeholder="手机号" bindinput='getmobileNo' maxlength='11'/>
                             </view>
                         </view>
                     </view>

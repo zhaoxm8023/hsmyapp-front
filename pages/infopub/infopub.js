@@ -20,7 +20,7 @@ Page({
     countryCodeIndex: 0,
 
     infoTypes: ["失物招领", "车位出租", "房屋出租"],
-    infoEnum: 1,
+    infoEnum: 0,
 
     accounts: ["微信号", "QQ", "Email"],
     accountIndex: 0,
@@ -78,6 +78,7 @@ Page({
       }
     ],
     countPic: 9,//上传图片最大数量
+    curIndex: 0,//当前上传的图片序号
     showImgUrl: "", //路径拼接，一般上传返回的都是文件名，
     uploadImgUrl: ''//图片的上传的路径
   },
@@ -90,7 +91,7 @@ Page({
   onLoad: function () {
     var that = this;
     this.setData({
-     
+      
     });
     wx.getSystemInfo({
       success: function (res) {
@@ -102,17 +103,39 @@ Page({
         });
       }
     });
-    var today = util.formatDate(new Date());
+    var date = new Date()
+    date.setMonth(date.getMonth() + 1)
+    var nextMonth = util.formatDate(date);
     this.setData({
-      infoEnddata: today
+      infoEnddata: nextMonth
     })
 
   },
+
+  resetInfo: function () {
+    this.setData({
+      infoTitle: '',
+      infoDesc: '',
+      countryCodeIndex: 0,
+      mobileNo: '',
+      infoEnum: 0,
+      img_url: []
+    });
+    var date = new Date()
+    date.setMonth(date.getMonth() + 1)
+    var nextMonth = util.formatDate(date);
+    this.setData({
+      infoEnddata: nextMonth
+    })
+
+  },
+
   tabClick: function (e) {
     this.setData({
       sliderOffset: e.currentTarget.offsetLeft,
       activeIndex: e.currentTarget.id
     });
+    this.resetInfo()
   },
 
   getinfoTitle: function(e) {
@@ -206,14 +229,35 @@ Page({
     })
   },
 
+  
+
   showTopTips: function(e) {
     var that = this
+    var mobile = that.data.mobileNo
+    if (mobile.length != 11){
+      wx.showToast({
+        title: '手机号长度有误！',
+        icon: 'success',
+        duration: 1500
+      })
+      return
+    }
+    var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1}))+\d{8})$/;
+    if (!myreg.test(mobile)) {
+      wx.showToast({
+        title: '手机号有误！',
+        icon: 'success',
+        duration: 1500
+      })
+      return
+    }
+
     var picsSerno = util.getRandomCode(12)
     console.log(picsSerno)
+    console.log(this.data.infoTitle)
     this.setData({
       picsSerno: picsSerno
     })
-    console.log(e)
     wx.showLoading({
       title: '发布中--',
     })
@@ -221,14 +265,28 @@ Page({
       console.log(data)
       if (data.status == 0) {
         console.log('发布信息成功！返回主键 ： ' + data.payload.infoSerno)
-        that.tabClick()
-        
-      } else if (data.status == '1') {
+        wx.hideLoading();
         wx.showToast({
-          title: data.responseCode,
+          title: '上传成功!~~',
+          icon: 'success'
+        });
+        that.setData({
+          sliderOffset: 0,
+          activeIndex: 0,
+          sliderLeft: 0,
+        })
+        that.resetInfo()
+        
+      } else if (data.status == 1) {
+        console.log('发布信息失败！失败原因 ： ' + data.responseMessage)
+        wx.hideLoading();
+        wx.showToast({
+          title: data.responseMessage,
         })
       }
     })
-  }
+  },
+
+
 
 });
