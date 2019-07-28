@@ -1,4 +1,4 @@
-import { infoPub, uploadImages } from "../../service/service.js"
+import { infoPub, uploadImages, getPubInfo } from "../../service/service.js"
 var sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位置
 var util = require('../../utils/util.js');
 //获取应用实例
@@ -28,59 +28,18 @@ Page({
     isAgree: false,
     img_url: [],
     //后续做后台拉取的json 列表格式
-    listdata : [
-      {
-        demo1:"1",
-        demo2:"2",
-        icon: '../pics/icon20.png'
-      },
-
-      {
-        demo1: "3",
-        demo2: "4",
-         icon: '../pics/icon20.png'
-         },
-        
-
-      {
-        demo1: "1",
-        demo2: "2",
-        icon: '../pics/icon20.png'},
-      {
-        demo1: "1",
-        demo2: "2",
-         icon: '../pics/icon20.png'
-      },
-      {
-        demo1: "1",
-        demo2: "2",
-        icon: '../pics/icon20.png'
-      },
-      {
-        demo1: "1",
-        demo2: "2",
-        icon: '../pics/icon20.png'
-      },
-      {
-        demo1: "1",
-        demo2: "2",
-        icon: '../pics/icon20.png'
-      },
-      {
-        demo1: "1",
-        demo2: "2",
-        icon: '../pics/icon20.png'
-      },
-      {
-        demo1: "1",
-        demo2: "2",
-        icon: '../pics/icon20.png'
-      }
-    ],
+    listdata : [],
     countPic: 9,//上传图片最大数量
     curIndex: 0,//当前上传的图片序号
     showImgUrl: "", //路径拼接，一般上传返回的都是文件名，
-    uploadImgUrl: ''//图片的上传的路径
+    uploadImgUrl: '',//图片的上传的路径
+    //查询参数
+    qrydata: {
+      isMine: 0,
+      page: 1,
+      pagesize: 10
+    },
+    count: 0 //当前页面信息列表总数
   },
 
    //监听组件事件，返回的结果
@@ -88,11 +47,29 @@ Page({
    console.log("上传的图片结果集合")
    console.log(e.detail.picsList)
   },
+
+  //isMore 0:初始查询 1:查询更多
+  getInfoList: function (isMore) {
+    var that = this;
+    getPubInfo(app, this.data.qrydata, function (res) {
+      let listdata;
+      if (isMore == 0){
+        listdata = [];
+      } else if (isMore == 1){
+        listdata = that.data.listdata;
+      }
+      for (let i = 0; i < res.data.length; i++) {
+        listdata.push(res.data[i])
+      }
+      that.setData({
+        listdata: listdata,
+        count: res.count
+      })
+    })
+  },
+
   onLoad: function () {
     var that = this;
-    this.setData({
-      
-    });
     wx.getSystemInfo({
       success: function (res) {
         that.setData({
@@ -103,13 +80,7 @@ Page({
         });
       }
     });
-    var date = new Date()
-    date.setMonth(date.getMonth() + 1)
-    var nextMonth = util.formatDate(date);
-    this.setData({
-      infoEnddata: nextMonth
-    })
-
+    this.resetInfo();
   },
 
   resetInfo: function () {
@@ -126,7 +97,15 @@ Page({
     var nextMonth = util.formatDate(date);
     this.setData({
       infoEnddata: nextMonth
-    })
+    });
+    this.setData({
+      qrydata: {
+        isMine: 0,
+        page: 1,
+        pagesize: 10
+      }
+    });
+    this.getInfoList(0);
 
   },
 
@@ -135,7 +114,30 @@ Page({
       sliderOffset: e.currentTarget.offsetLeft,
       activeIndex: e.currentTarget.id
     });
-    this.resetInfo()
+
+    var index = this.data.activeIndex
+    if(index == 0){
+      this.setData({
+        qrydata: {
+          isMine: 0,
+          page: 1,
+          pagesize: 10
+        }
+      });
+      this.getInfoList(0);
+    } else if(index == 1){
+      this.setData({
+        qrydata: {
+          isMine: 1,
+          page: 1,
+          pagesize: 10
+        }
+      });
+      this.getInfoList(0);
+    } else if(index == 2){
+      this.resetInfo();
+    }
+    
   },
 
   getinfoTitle: function(e) {
@@ -261,31 +263,152 @@ Page({
     wx.showLoading({
       title: '发布中--',
     })
-    uploadImages(app, this.data, function (data) {
-      console.log(data)
-      if (data.status == 0) {
-        console.log('发布信息成功！返回主键 ： ' + data.payload.infoSerno)
-        wx.hideLoading();
-        wx.showToast({
-          title: '上传成功!~~',
-          icon: 'success'
-        });
-        that.setData({
-          sliderOffset: 0,
-          activeIndex: 0,
-          sliderLeft: 0,
-        })
-        that.resetInfo()
-        
-      } else if (data.status == 1) {
-        console.log('发布信息失败！失败原因 ： ' + data.responseMessage)
-        wx.hideLoading();
-        wx.showToast({
-          title: data.responseMessage,
-        })
-      }
-    })
+    //如果没有上传图片
+    var index = that.data.curIndex
+    if (index == 0){
+      infoPub(app, this.data, function(data){
+        console.log(data)
+        if (data.status == 0) {
+          console.log('发布信息成功！返回主键 ： ' + data.payload.infoSerno)
+          wx.hideLoading();
+          wx.showToast({
+            title: '上传成功!~~',
+            icon: 'success'
+          });
+          that.setData({
+            sliderOffset: 0,
+            activeIndex: 0,
+            sliderLeft: 0,
+          })
+          that.resetInfo()
+
+        } else if (data.status == 1) {
+          console.log('发布信息失败！失败原因 ： ' + data.responseMessage)
+          wx.hideLoading();
+          wx.showToast({
+            title: data.responseMessage,
+          })
+        }
+      })
+    }else{
+      uploadImages(app, this.data, function (data) {
+        console.log(data)
+        if (data.status == 0) {
+          console.log('发布信息成功！返回主键 ： ' + data.payload.infoSerno)
+          wx.hideLoading();
+          wx.showToast({
+            title: '上传成功!~~',
+            icon: 'success'
+          });
+          that.setData({
+            sliderOffset: 0,
+            activeIndex: 0,
+            sliderLeft: 0,
+          })
+          that.resetInfo()
+
+        } else if (data.status == 1) {
+          console.log('发布信息失败！失败原因 ： ' + data.responseMessage)
+          wx.hideLoading();
+          wx.showToast({
+            title: data.responseMessage,
+          })
+        }
+      })
+    }
+
   },
+
+  scroll: function(e) {
+    
+  },
+
+  loadMoreall : function (e) {
+    console.log("=========loadMoreall========")
+    console.log("listdata.length:" + this.data.listdata.length)
+    if (this.data.listdata.length >= this.data.count){
+      console.log("已经到最底部了！");
+      wx.showToast({
+        title: '已经到最底部了！',
+        icon: 'none',
+      })
+      return;
+    }
+
+    var page = this.data.qrydata.page + 1
+    console.log("page:" + page)
+
+    wx.showToast({
+      title: '加载中...',
+      duration: 100,
+      icon: 'loading',
+    })
+
+    this.setData({
+      qrydata: {
+        isMine: 0,
+        page: page,
+        pagesize: 10
+      }
+    });
+    this.getInfoList(1);
+
+
+  },
+
+  loadMoremine: function(e){
+    console.log("=========loadMoremine========")
+
+    console.log("listdata.length:" + this.data.listdata.length)
+    if (this.data.listdata.length >= this.data.count) {
+      console.log("已经到最底部了！");
+      wx.showToast({
+        title: '已经到最底部了！',
+        icon: 'none',
+      })
+      return;
+    }
+
+    var page = this.data.qrydata.page + 1
+    console.log("page:" + page)
+
+    wx.showToast({
+      title: '加载中...',
+      duration: 100,
+      icon: 'loading',
+    })
+
+    this.setData({
+      qrydata: {
+        isMine: 1,
+        page: page,
+        pagesize: 10
+      }
+    });
+    this.getInfoList(1);
+
+  },
+
+  loadNewall: function (e) {
+    console.log("=========loadNewall========")
+    wx.showToast({
+      title: '刷新中...',
+      duration: 100,
+      icon: 'loading',
+    })
+    this.setData({
+      qrydata: {
+        isMine: 0,
+        page: 1,
+        pagesize: 10
+      }
+    });
+    this.getInfoList(0);
+
+  },
+
+
+
 
 
 

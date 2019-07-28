@@ -71,9 +71,9 @@ function joinUs(app,data,cb){
 
 function infoPub(app,data,cb){
   wx.request({
-    url: app.globalData.url + 'hsmy/infopub',
+    url: app.globalData.url + 'hsmy/infopub/wordsonly',
     data:{
-      openId: data.openId,
+      openId: app.globalData.openId,
       mobileNo: data.mobileNo,
       infoTitle: data.infoTitle,
       infoEnum: data.infoEnum,
@@ -166,4 +166,33 @@ function infoPub(app,data,cb){
   })
 }
 
-export { getOpenId, isRegister, joinUs, getMobileSeqNos, infoPub, uploadImages}
+function getPubInfo(app, qrydata, cb) {
+  var qryurl;
+  var isMine = qrydata.isMine;
+  var page = qrydata.page;
+  var pagesize = qrydata.pagesize;
+  //0：查询所有；1：查询个人
+  if (isMine == 0){
+    qryurl = app.globalData.url + '/hsmy/infopub/list/' + 'all/' + page + '/' + pagesize;
+  } else if (isMine == 1){
+    qryurl = app.globalData.url + '/hsmy/infopub/list/' + app.globalData.openId + '/' + page + '/' + pagesize;
+  }
+
+  wx.request({
+    url: qryurl,
+    method: 'GET',
+    success: function (res) {
+      console.log(res.data)
+      typeof cb == "function" && cb(res.data)
+    },
+    fail: function (res) {
+      console.log("==============failed=============")
+      wx.showToast({
+        title: '连接超时！',
+        icon: 'none'
+      })
+    }
+  })
+}
+
+export { getOpenId, isRegister, joinUs, getMobileSeqNos, infoPub, uploadImages, getPubInfo}

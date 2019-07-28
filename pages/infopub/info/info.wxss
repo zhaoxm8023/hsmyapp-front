@@ -1,0 +1,11 @@
+page,
+.page,
+.page__bd{
+    height: 100%;
+    background-color:gainsboro;
+}
+.page__bd{
+    padding-bottom: 0;
+    padding-top: 10;
+}
+

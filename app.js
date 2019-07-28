@@ -25,7 +25,7 @@ App({
   },
   globalData: {
     userInfo: null,
-    url: 'http://localhost:8000/app/',
+    url: 'http://192.168.0.103:8000/app/',
     openId: '',
   },  
 })

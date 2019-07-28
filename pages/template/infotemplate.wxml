@@ -2,15 +2,15 @@
     <block wx:key = "{{index}}" wx:for = "{{listdata}}">
         <view class="weui-list_template">
             <view class="weui-cell">
-                <navigator url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+                <navigator url="../infopub/info/info?id={{item.info_title}}" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active" >
                     <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-                        <image class="weui-media-box__thumb" src="{{item.icon}}" />
+                        <image class="weui-media-box__thumb" src="../pics/icon20.png" />
                     </view>
                     <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-                        <view class="weui-media-box__kind">类型</view>
-                        <view class="weui-media-box__title">小标题</view>
-                        <view class="weui-media-box__desc">我的模版</view>
-                        <view class="weui-media-box__time">时间</view>
+                        <view class="weui-media-box__kind">{{item.info_enum}}</view>
+                        <view class="weui-media-box__title">{{item.info_title}}</view>
+                        <view class="weui-media-box__desc">{{item.info_desc}}</view>
+                        <view class="weui-media-box__time">{{item.info_workdata}}</view>
                     </view>
                 </navigator>
             </view>

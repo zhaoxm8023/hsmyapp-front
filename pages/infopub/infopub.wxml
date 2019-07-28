@@ -12,12 +12,12 @@
             </view>
             <view class="weui-tab__panel">
                 <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
-                    <scroll-view class="scroll" scroll-top="{{100}}" scroll-y="true" bindscroll="scrll" bindscrolltolower="loadMore" style="height: {{scroll_height}}px;">
+                    <scroll-view class="scroll" scroll-top="{{100}}" scroll-y="true" bindscroll="scroll" bindscrolltolower="loadMoreall" bindscrolltoupper="loadNewall" style="height: {{scroll_height}}px;">
                         <template is="infotemplate" data="{{listdata}}"/>
                     </scroll-view>
                 </view>
                 <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
-                    <scroll-view class="scroll" scroll-top="{{100}}" scroll-y="true" bindscroll="scrll" bindscrolltolower="loadMore" style="height: {{scroll_height}}px;">
+                    <scroll-view class="scroll" scroll-top="{{100}}" scroll-y="true" bindscroll="scroll" bindscrolltolower="loadMoremine" style="height: {{scroll_height}}px;">
                         <template is="infotemplate" data="{{listdata}}"/>
                     </scroll-view>
                 </view>
