@@ -173,9 +173,9 @@ function getPubInfo(app, qrydata, cb) {
   var pagesize = qrydata.pagesize;
   //0：查询所有；1：查询个人
   if (isMine == 0){
-    qryurl = app.globalData.url + '/hsmy/infopub/list/' + 'all/' + page + '/' + pagesize;
+    qryurl = app.globalData.url + 'hsmy/infopub/list/' + 'all/' + page + '/' + pagesize;
   } else if (isMine == 1){
-    qryurl = app.globalData.url + '/hsmy/infopub/list/' + app.globalData.openId + '/' + page + '/' + pagesize;
+    qryurl = app.globalData.url + 'hsmy/infopub/list/' + app.globalData.openId + '/' + page + '/' + pagesize;
   }
 
   wx.request({
@@ -195,4 +195,26 @@ function getPubInfo(app, qrydata, cb) {
   })
 }
 
-export { getOpenId, isRegister, joinUs, getMobileSeqNos, infoPub, uploadImages, getPubInfo}
+function getOneInfo(app, data, cb){
+  var info_serno = data.info_serno;
+  var openId = app.globalData.openId
+  wx.request({
+    url: app.globalData.url + 'hsmy/infopub/' + info_serno,
+    method: 'GET',
+    success: function (res) {
+      console.log(res.data)
+      typeof cb == "function" && cb(res.data)
+    },
+    fail: function (res) {
+      console.log("==============failed=============")
+      wx.showToast({
+        title: '连接超时！',
+        icon: 'none'
+      })
+    }
+  })
+
+}
+
+
+export { getOpenId, isRegister, joinUs, getMobileSeqNos, infoPub, uploadImages, getPubInfo, getOneInfo}

@@ -164,7 +164,7 @@ Page({
     var upload_picture_list = that.data.upload_picture_list
     wx.chooseImage({
       count: count,
-      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+      sizeType: ['compressed'], // 可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success: function (res) {
         if(res.tempFilePaths.length > 0){
@@ -264,7 +264,7 @@ Page({
       title: '发布中--',
     })
     //如果没有上传图片
-    var index = that.data.curIndex
+    var index = that.data.img_url.length
     if (index == 0){
       infoPub(app, this.data, function(data){
         console.log(data)

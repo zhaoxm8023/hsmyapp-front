@@ -1,12 +1,11 @@
 {
   "pages":[
-    
+    "pages/login/login",
+    "pages/register/register",
     "pages/infopub/infopub",
     "pages/infopub/info/info",
     "pages/main/main",
-    "pages/login/login",
     "pages/addbook/addbook",
-    "pages/register/register",
     "pages/index/index",
     "pages/logs/logs",
     "pages/works/works",

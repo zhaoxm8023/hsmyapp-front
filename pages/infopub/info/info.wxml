@@ -4,7 +4,7 @@
     <view class="weui-cells weui-cells_after-title">
         <view class="weui-cell weui-cell_input">
             <view class="weui-cell__bd">
-                <input class="weui-input" id = 'infoTitle' value = '{{infoTitle}}' bindinput='getinfoTitle' maxlength='20' disabled='true'/>
+                <input class="weui-input" id = 'infoTitle' value = '{{infoItem.infoTitle}}' bindinput='getinfoTitle' maxlength='20' disabled='{{isDisabled}}'/>
             </view>
         </view>
     </view>
@@ -12,7 +12,7 @@
     <view class="weui-cells weui-cells_after-title">
         <view class="weui-cell">
             <view class="weui-cell__bd">
-                <textarea class="weui-textarea" id = 'infoDesc' value='{{infoDesc}}' placeholder="请输入文本" style="height: 3.3em" bindinput='getinfoDesc' maxlength='200'/>
+                <textarea class="weui-textarea" id = 'infoDesc' value='{{infoItem.infoDesc}}' placeholder="请输入文本" style="height: 3.3em" bindinput='getinfoDesc' maxlength='200' disabled='{{isDisabled}}'/>
                 <view class="weui-textarea-counter">0/200</view>
             </view>
         </view>
@@ -20,12 +20,10 @@
     <view class="weui-cells weui-cells_after-title">
         <view class="weui-cell weui-cell_select">
             <view class="weui-cell__hd" style="width: 105px">
-                <picker bindchange="bindCountryCodeChange" value="{{countryCodeIndex}}" range="{{countryCodes}}">
-                    <view class="weui-select">{{countryCodes[countryCodeIndex]}}</view>
-                </picker>
+                <view class="label">手机号</view>
             </view>
             <view class="weui-cell__bd weui-cell__bd_in-select-before">
-                <input class="weui-input" id='mobileNo' value='{{mobileNo}}' placeholder="手机号" bindinput='getmobileNo' maxlength='11'/>
+                <input class="weui-input" id='mobileNo' value='{{infoItem.mobileNo}}' placeholder="手机号" bindinput='getmobileNo' maxlength='11' disabled='{{isDisabled}}'/>
             </view>
         </view>
     </view>
@@ -34,8 +32,8 @@
             <view class="weui-label">截止日期</view>
         </view>
         <view class="weui-cell__bd">
-            <picker mode="date" value="{{infoEnddata}}" start="2015-09-01" end="2040-09-01" bindchange="bindDateChange">
-                <view class="weui-input">{{infoEnddata}}</view>
+            <picker mode="date" value="{{infoItem.infoEnddata}}" start="2015-09-01" end="2040-09-01" bindchange="bindDateChange" disabled='{{isDisabled}}'>
+                <view class="weui-input" >{{infoItem.infoEnddata}}</view>
             </picker>
         </view>
     </view>
@@ -45,20 +43,20 @@
                 <view class="weui-label">信息类型</view>
             </view>
             <view class="weui-cell__bd">
-                <picker bindchange="bindCountryChange" value="{{infoEnum}}" range="{{infoTypes}}">
-                    <view class="weui-select weui-select_in-select-after">{{infoTypes[infoEnum]}}</view>
+                <picker bindchange="bindCountryChange" value="{{infoEnum}}" range="{{infoTypes}}" disabled='{{isDisabled}}'>
+                    <view class="weui-select weui-select_in-select-after">{{infoTypes[infoItem.infoEnum]}}</view>
                 </picker>
             </view>
         </view>
     </view>
-    <text class='picture_text'>图片上传</text>
+    <text class='label'>图片信息</text>
     <view class="picture_list">
         <view wx:for="{{img_url}}" class="picture_item" wx:key="{{index}}">
             <image class="moment_img" mode="aspectFill" data-index='{{index}}' src="{{item}}" bindtap="previewImg"></image>
-            <text class='del' bindtap='deleteImg' data-src='{{image}}' style='display:{{isDel}}' data-index="{{index}}">×</text>
+            <text class='del' bindtap='deleteImg' data-src='{{image}}' style='display:{{isDisabled?"none":"block"}}' data-index="{{index}}">×</text>
         </view>
         <view class='picture_item'>
-            <view class="add-image" bindtap='chooseimage' style='display:{{hideAdd?"none":"block"}}'>
+            <view class="add-image" bindtap='chooseimage' style='display:{{isDisabled?"none":"block"}}'>
                 <text>+</text>
             </view>
         </view>

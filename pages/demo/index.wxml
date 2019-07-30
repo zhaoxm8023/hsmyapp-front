@@ -1,9 +1,0 @@
-<!--pages/demo/index.wxml-->
-<import src = "demo.wxml"/>
-<template is = "item"/>
-<text>pages/demo/index.wxml</text>
-<text>{{time}}</text>
-<template name = "temp1">
-<text> {{num1}}: {{num2}}:{{num3}} </text>
-</template>
-<template is = "temp1" data = "{{...item}}"/>

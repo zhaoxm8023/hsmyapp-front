@@ -1,3 +1,0 @@
-<import src = "index.wxml"/>
-<template is = "temp1" data = "{{...item}}"/>
-<view style="color: red;" ></view>

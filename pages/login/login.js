@@ -37,11 +37,12 @@ Page({
     var that = this
     isRegister(app,app.globalData.openId,function(isRegit){
       console.log("=========status:" + isRegit)
-      if(isRegit == '1'){
-        wx.switchTab({
+      if(isRegit == 1){
+        console.log("============未注册！============")
+        wx.navigateTo({
           url: '../register/register',
         })
-      } else if (isRegit == '0'){
+      } else if (isRegit == 0){
         console.log("============已注册！============")
         wx.switchTab({
           url: '../main/main',
