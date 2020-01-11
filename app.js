@@ -14,7 +14,7 @@ App({
        console.log("===========openId:" + that.globalData.openId)
       }
     }),
-    wx.setTabBarBadge({
+    wx.setTabBarBadge({ 
       index: 1,
       text: '5' //可改 
     });
@@ -23,9 +23,9 @@ App({
       text: 'new' //可改 
     });
   },
-  globalData: {
+  globalData: { 
     userInfo: null,
-    url: 'http://192.168.0.102:8000/app/',
+    url: 'http://localhost:8000/app/',
     openId: '',
   },  
 })

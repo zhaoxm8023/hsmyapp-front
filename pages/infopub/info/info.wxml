@@ -62,7 +62,7 @@
         </view>
     </view>
     <view class="weui-btn-area">
-        <button class="weui-btn" type="primary" bindtap="return">返回gggeg</button>
+        <button class="weui-btn" type="primary" bindtap="return">返回</button>
     </view>
   </view>
 </view>

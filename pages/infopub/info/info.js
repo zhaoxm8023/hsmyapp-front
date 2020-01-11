@@ -37,7 +37,7 @@ Page({
 
       let img_url = []
       for (let i = 0; i < listImage.length; i++){
-        var url = "http://192.168.0.102:8000/app/image/get?openId=" + openId + "&imageName=" + listImage[i]
+        var url = app.globalData.url +  "image/get?openId=" + openId + "&imageName=" + listImage[i]
         console.log(url)
         img_url.push(url)
       }
