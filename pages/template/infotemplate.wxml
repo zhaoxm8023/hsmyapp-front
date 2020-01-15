@@ -1,5 +1,5 @@
 <template name="infotemplate">
-    <block wx:key = "{{index}}" wx:for = "{{listdata}}">
+    <block wx:key = "index" wx:for = "{{listdata}}">
         <view class="weui-list_template">
             <view class="weui-cell">
                 <navigator url="../infopub/info/info?id={{item.info_serno}}" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active" >

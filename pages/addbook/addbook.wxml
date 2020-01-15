@@ -1,10 +1,11 @@
+<import src = "../template/infotemplate.wxml"/>
 <view class="page">
     <view class="page__bd">
         <view class="weui-search-bar">
             <view class="weui-search-bar__form">
                 <view class="weui-search-bar__box">
                     <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
-                    <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" />
+                    <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" bindconfirm='btn_search'/>
                     <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
                         <icon type="clear" size="14"></icon>
                     </view>
@@ -16,7 +17,17 @@
             </view>
             <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
         </view>
-        <view class="weui-cells searchbar-result" wx:if="{{inputVal.length > 0}}">
+      <view class='history-box' wx:if="{{inputVal.length == 0 && inputShowed}}">
+          <view class='history' bindtap='deleteHistory' wx:if="{{showHistory}}">清除搜索历史</view>
+          <view class='h_con' wx:if="{{showHistory}}">
+            <view class='h_con1'>
+              <view class="stitle" wx:for="{{searchArray}}" wx:key='index' bindtap='toSearch' data-value='{{item}}' data-index="{{index}}">{{item}}</view>
+            </view>
+        </view>
+      </view>
+        
+
+        <view class="weui-cells searchbar-result" wx:if="{{inputVal.length > 0 && !isShowResult}}">
             <navigator url="" class="weui-cell" hover-class="weui-cell_active">
                 <view class="weui-cell__bd">
                     <view>实时搜索文本</view>
@@ -38,5 +49,12 @@
                 </view>
             </navigator>
         </view>
+
+      <view class="search_result" wx:if="{{isShowResult}}">
+        <scroll-view class="scroll" scroll-top="{{100}}" scroll-y="true" bindscroll="scroll" bindscrolltolower="loadMoreall" bindscrolltoupper="loadNewall" style="height: {{scroll_height}}px;">
+          <template is="infotemplate" data="{{listdata}}"/>
+        </scroll-view>
+      </view>
+
     </view>
 </view>

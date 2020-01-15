@@ -163,5 +163,13 @@ Page({
     this.setData({
       current: detail.key
     });
-  }
+  },
+  /**
+   * search-bar处理
+   */
+  showInput: function () {
+    wx.navigateTo({
+      url: '../addbook/addbook'
+    })
+  },
 })

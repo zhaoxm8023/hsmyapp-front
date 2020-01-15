@@ -8,3 +8,55 @@
 .weui-cell{
     padding: 12px 15px 12px 35px;
 }
+.menu{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border-bottom:1px solid gainsboro;
+    height: 125rpx;
+}
+
+.search{
+    border:5px solid whitesmoke;
+    margin-left: 35rpx;
+    width: 500rpx;
+    background:whitesmoke;
+    border-radius: 6%;
+}
+
+.btn{
+    margin-right: 35rpx;
+    font-size:15px;
+}
+
+.history{
+  font-size:15px;
+  margin-left: 35rpx;
+  color: red;
+  text-decoration:underline;
+}
+
+.h_con1{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  border-bottom:1px solid gainsboro;
+}
+
+.stitle{
+  border: 3px solid whitesmoke;
+  margin: 20rpx;
+  font-size: 15px;
+  background:whitesmoke;
+  border-radius: 5%;
+}
+
+.weui-list_template {
+   padding: 20rpx;
+   border-bottom: 20rpx solid white;
+   background: whitesmoke;
+} 
+
+

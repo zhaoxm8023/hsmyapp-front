@@ -4,7 +4,7 @@
         <view class="weui-tab">
             <view class="weui-navbar">
                 <block wx:for="{{tabs}}" wx:key="*this">
-                    <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
+                    <view id="index" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
                         <view class="weui-navbar__title">{{item}}</view>
                     </view>
                 </block>
@@ -75,9 +75,9 @@
                     </view>
                     <text class='picture_text'>图片上传</text>
                     <view class="picture_list">
-                        <view wx:for="{{img_url}}" class="picture_item" wx:key="{{index}}">
-                            <image class="moment_img" mode="aspectFill" data-index='{{index}}' src="{{item}}" bindtap="previewImg"></image>
-                            <text class='del' bindtap='deleteImg' data-src='{{image}}' style='display:{{isDel}}' data-index="{{index}}">×</text>
+                        <view wx:for="{{img_url}}" class="picture_item" wx:key="index">
+                            <image class="moment_img" mode="aspectFill" data-index='index' src="{{item}}" bindtap="previewImg"></image>
+                            <text class='del' bindtap='deleteImg' data-src='{{image}}' style='display:{{isDel}}' data-index="index">×</text>
                         </view>
                         <view class='picture_item'>
                             <view class="add-image" bindtap='chooseimage' style='display:{{hideAdd?"none":"block"}}'>

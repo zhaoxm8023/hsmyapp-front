@@ -5,22 +5,34 @@ Page({
    * 页面的初始数据
    */
   data: {
-    title : "demo ",
+    title: "搜索 ",
     inputShowed: false,
-    inputVal: ""
+    inputVal: "",
+    searchTmpArray:[],
+    searchArray:[],
+    showHistory:true,
+    listdata:[
+      {info_desc: "123",info_enddata: "2020-02-11",info_enum: "0",info_serno: "375869157463941120",info_title: "123",info_workdata: "2020-01-11",last_date: 1578725801000,
+mobile_no: "15467890987",open_id: "oquGP4i9_AsHCB5m22J1Tgp2WzCk",pics_desc: "Rza3c4DPkbCp"},
+      { info_enum: "0", info_desc: "123", info_serno: "375868503324483584", info_title: "233", open_id: "oquGP4i9_AsHCB5m22J1Tgp2WzCk", pics_desc: "S5bN4leYvMPa"}
+    ],
+    isShowResult:false
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
-      title: options.code
-    })
-
 
     wx.setNavigationBarTitle({
-      title: options.name,
+      title: this.data.title
+    })
+
+    var searchArray = wx.getStorageSync("history")
+    this.setData({
+      searchTmpArray: searchArray,
+      searchArray: searchArray.reverse()
     })
   },
 
@@ -85,12 +97,92 @@ Page({
   },
   clearInput: function () {
     this.setData({
-      inputVal: ""
+      inputVal: "",
+      isShowResult: false
     });
   },
   inputTyping: function (e) {
     this.setData({
-      inputVal: e.detail.value
+      inputVal: e.detail.value,
+      isShowResult: false
     });
+  },
+
+
+  deleteHistory:function(e) {
+    wx.removeStorageSync("history")
+      this.setData({
+        searchTmpArray:[],
+        searchArray: [],
+        showHistory: false
+      })
+  },
+
+
+  btn_search: function(e) {
+    if (this.data.inputVal == ""){
+      wx.showToast({
+        title: '搜索内容为空',
+        icon: 'none',
+        duration: 2000
+      })
+      return;
+    }
+    this.buildHistory(this.data.inputVal)
+  },
+
+  buildHistory: function (e) {
+    var searchArray = this.data.searchTmpArray
+    if (wx.getStorageSync("history").length > 0 && wx.getStorageSync("history").length < 8) {//有搜索记录且小于8个时
+      let index = wx.getStorageSync("history").indexOf(e)
+      if (index < 0) {//若搜索记录不存在，则直接追加
+        searchArray = wx.getStorageSync("history").concat(e)
+        wx.setStorageSync("history", searchArray)
+      } else {//若搜索记录存在，则调到头部
+        searchArray = wx.getStorageSync("history")
+        searchArray.splice(index, 1)
+        searchArray = searchArray.concat(e)
+        wx.setStorageSync("history", searchArray)
+      }
+    } else if (wx.getStorageSync("history").length >= 8) {//搜索记录大于8个
+      let index1 = wx.getStorageSync("history").indexOf(e)
+      if (index1 > -1) {//若搜索记录存在，则调到头部
+        searchArray = wx.getStorageSync("history")
+        searchArray.splice(index1, 1)
+        searchArray = searchArray.concat(e)
+        wx.setStorageSync("history", searchArray)
+      } else {
+        //若搜索记录不存在，则删除最老的一个，然后追加
+        searchArray = wx.getStorageSync("history")
+        searchArray.splice(0, 1)
+        searchArray = searchArray.concat(e)
+        wx.setStorageSync("history", searchArray)
+      }
+      
+
+    } else {//无搜索记录则直接追加
+      searchArray = searchArray.concat(e)
+      wx.setStorageSync("history", searchArray)
+      this.setData({
+        showHistory: true
+      })
+    }
+    this.setData({
+      searchTmpArray: searchArray,
+      searchArray: searchArray.reverse(),
+      isShowResult: true
+    })
+  },
+
+  /** 
+   * 直接显示历史搜索记录
+  **/
+  toSearch: function(e){
+    this.setData({
+      inputVal: e.currentTarget.dataset.value,
+    })
+    this.buildHistory(this.data.inputVal)
   }
+  
+
 })
